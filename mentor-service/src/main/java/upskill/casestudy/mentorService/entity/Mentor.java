@@ -27,7 +27,7 @@ public class Mentor {
 
    	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     private Long empId;
 
@@ -46,7 +46,7 @@ public class Mentor {
     private String stream;
     
     @Lob
-    private String[] skills;
+    private String skills;
     
 	private String status;
 	

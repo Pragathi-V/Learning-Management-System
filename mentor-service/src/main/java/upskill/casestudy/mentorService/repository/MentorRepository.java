@@ -7,7 +7,7 @@ import upskill.casestudy.mentorService.entity.Mentor;
 
 import java.util.Optional;
 
-public interface MentorRepository extends JpaRepository<Mentor, Integer> {
+public interface MentorRepository extends JpaRepository<Mentor, Long> {
 
     Optional<Mentor> findByEmail(String email);
     

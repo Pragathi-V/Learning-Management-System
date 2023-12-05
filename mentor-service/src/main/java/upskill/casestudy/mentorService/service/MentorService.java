@@ -10,6 +10,8 @@ public interface MentorService {
     public MentorDto createMentor(MentorDto mentorDto);
 
     public APIResponseDto getMentorByEmpId(Long empId);
+    
+    public APIResponseDto getMentorById(Long id);
 
     public List<MentorDto> getAllMentors();
 

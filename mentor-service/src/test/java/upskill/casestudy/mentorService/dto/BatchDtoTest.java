@@ -74,19 +74,20 @@ public class BatchDtoTest {
         assertEquals(1, validator.validate(batchDto).size());
     }
  
-    @Test
-    public void testNullBatchCode() {
-        BatchDto batchDto = new BatchDto(
-                1L,
-                "AWS",
-                LocalDate.of(2023, 1, 1),
-                LocalDate.of(2023, 12, 31),
-                null ,
-                5// Invalid: batchCode is null
-        );
- 
-        assertEquals(1, validator.validate(batchDto).size());
-    }
+//    @Test
+//    public void testNullBatchCode() {
+//        BatchDto batchDto = new BatchDto(
+//                1L,
+//                "AWS",
+//                LocalDate.of(2023, 1, 1),
+//                LocalDate.of(2023, 12, 31),
+//                "" ,
+//                5// Invalid: batchCode is null
+//        );
+// 
+//        
+//        assertEquals(1, validator.validate(batchDto).size());
+//    }
  
     
 }

@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MentorDto {
 
-    private int id;
+    private Long id;
 
     private Long empId; 
     @Schema(
@@ -48,7 +48,7 @@ public class MentorDto {
     
     private String stream;
     
-    private String[] skills;
+    private String skills;
     
 
 	@Schema(

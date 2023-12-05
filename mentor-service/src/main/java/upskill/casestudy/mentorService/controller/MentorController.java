@@ -48,7 +48,7 @@ public class MentorController {
             responseCode = "200",
             description = "HTTP Status 200 SUCCESS"
     )
-    @GetMapping("/{empId}")
+    @GetMapping("/empId/{empId}")
     public ResponseEntity<APIResponseDto> getMentorByEmpId(@PathVariable("empId") Long empId) {
         APIResponseDto apiResponseDto = mentorService.getMentorByEmpId(empId);
         return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
@@ -79,7 +79,7 @@ public class MentorController {
             responseCode = "200",
             description = "HTTP Status 200 SUCCESS"
     )
-    @PutMapping("{empId}")
+    @PutMapping("empId/{empId}")
     public ResponseEntity<MentorDto> updateMentor(@PathVariable Long empId, @RequestBody @Valid  MentorDto mentorDto){
         mentorDto.setEmpId(empId);
         MentorDto updateMentor = mentorService.updateMentor(mentorDto);
@@ -99,5 +99,20 @@ public class MentorController {
     public ResponseEntity<String> deleteMentor(@PathVariable Long empId){
         mentorService.deleteMentor(empId);
         return new ResponseEntity<String>("User successfully deleted!!", HttpStatus.OK);
+    }
+    @Operation(
+            summary = "Update mentor By ID REST API",
+            description = "Update mentor By REST API is used to delete a mentor  from the database"
+    )
+    
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status 200 SUCCESS"
+    )
+    @PutMapping("{id}")
+    public ResponseEntity<MentorDto> updateMentorById(@PathVariable Long id, @RequestBody @Valid  MentorDto mentorDto){
+        mentorDto.setId(id);
+        MentorDto updateMentor = mentorService.updateMentor(mentorDto);
+        return new ResponseEntity<MentorDto>(updateMentor, HttpStatus.OK);
     }
 }

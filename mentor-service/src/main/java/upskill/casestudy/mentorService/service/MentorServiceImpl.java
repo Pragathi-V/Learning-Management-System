@@ -100,17 +100,6 @@ public class MentorServiceImpl implements MentorService{
         mentor.setStream(mentorDto.getStream());
         mentor.setNumOfBatches(mentorDto.getNumOfBatches());
         mentor.setBatchCode(mentorDto.getBatchCode());
-//        if(!mentorDto.getBatchCode().isEmpty()) {
-//        	mentorDto.setNumOfBatches(mentorDto.getBatchCode().size());
-//        }else {
-//        	mentorDto.setNumOfBatches(0);
-//        }
-//        
-//        if(mentorDto.getNumOfBatches()>0) {
-//        	mentorDto.setStatus("Occupied");
-//        }else {
-//        	mentorDto.setStatus("Free");
-//        }
         
         if(mentorDto.getNumOfBatches()>0 && mentorDto.getBatchCode()== null) {
         	mentor.setStatus("Free");
@@ -122,6 +111,8 @@ public class MentorServiceImpl implements MentorService{
        
         return MentorMapper.mapToMentorDto(updatedMentor);
     }
+    
+    
 
     @Override
     public String deleteMentor(Long empId)  {
@@ -155,4 +146,24 @@ public class MentorServiceImpl implements MentorService{
         return apiResponseDto;
     }
 
-}
+
+	
+		@Override
+	    @CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDafaultBatch")
+	    public APIResponseDto getMentorById(Long id) {
+	        Mentor mentor = mentorRepository.findById(id)
+	                .orElseThrow(() -> new ResourceNotFoundException("Mentor", "id", id));
+	        BatchDto batchDto = webClient.get()
+	                .uri("http://localhost:8081/api/batch/code/" +mentor.getBatchCode())
+	                .retrieve()
+	                .bodyToMono(BatchDto.class)
+	                .block();
+	        MentorDto mentorDto = MentorMapper.mapToMentorDto(mentor);
+	        APIResponseDto apiResponseDto = new APIResponseDto();
+	        apiResponseDto.setBatch(batchDto);
+	        apiResponseDto.setMentor(mentorDto);
+	        return apiResponseDto;
+	    }
+
+	}
+

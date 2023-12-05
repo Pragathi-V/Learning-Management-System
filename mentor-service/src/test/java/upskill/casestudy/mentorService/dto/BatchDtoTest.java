@@ -1,17 +1,15 @@
 package upskill.casestudy.mentorService.dto;
 
+
 import static org.junit.jupiter.api.Assertions.*;
  
 import org.junit.jupiter.api.Test;
-
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
  
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
+import upskill.casestudy.mentorService.dto.BatchDto;
 import java.time.LocalDate;
  
 public class BatchDtoTest {
@@ -21,8 +19,14 @@ public class BatchDtoTest {
  
     @Test
     public void testValidBatchDto() {
-        BatchDto batchDto = new BatchDto();
-               
+        BatchDto batchDto = new BatchDto(
+                1L,
+                "AWS",
+                LocalDate.of(2023, 1, 1),
+                LocalDate.of(2023, 12, 31),
+                "AWS101",
+                5
+        );
  
         assertTrue(validator.validate(batchDto).isEmpty());
     }

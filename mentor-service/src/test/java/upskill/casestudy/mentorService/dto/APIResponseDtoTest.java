@@ -10,17 +10,18 @@ class APIResponseDtoTest {
 
 	void testAPIResponseDtoConstructorAndGetters() {
 
-	MentorDto mentorDto = new MentorDto(1L, "pragathi", "pragathi@gmail.com", 40, "Occupied", "C123");
+		 MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
+	                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
+	                "Occupied", 2, "BATCH001");
+	BatchDto batchDto = new BatchDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01",2);
 
-	CourseDto courseDto = new CourseDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01");
-
-	APIResponseDto apiResponseDto = new APIResponseDto(mentorDto, courseDto);
+	APIResponseDto apiResponseDto = new APIResponseDto(mentorDto, batchDto);
 
 	assertNotNull(apiResponseDto);
 
 	assertEquals(mentorDto, apiResponseDto.getMentor());
 
-	assertEquals(courseDto, apiResponseDto.getCourse());
+	assertEquals(batchDto, apiResponseDto.getBatch());
 
 	}
 
@@ -32,17 +33,18 @@ class APIResponseDtoTest {
 
 	assertNotNull(apiResponseDto);
 
-	MentorDto mentorDto = new MentorDto(1L, "pragathi", "pragathi@gmail.com", 40, "Occupied", "C123");
-
-	CourseDto courseDto = new CourseDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01");
+	 MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
+             "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
+             "Occupied", 2, "BATCH001");
+	BatchDto batchDto = new BatchDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01", 2);
 
 	apiResponseDto.setMentor(mentorDto);
 
-	apiResponseDto.setCourse(courseDto);
+	apiResponseDto.setBatch(batchDto);
 
 	assertEquals(mentorDto, apiResponseDto.getMentor());
 
-	assertEquals(courseDto, apiResponseDto.getCourse());
+	assertEquals(batchDto, apiResponseDto.getBatch());
 
 	}
 

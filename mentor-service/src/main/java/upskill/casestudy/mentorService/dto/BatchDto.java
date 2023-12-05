@@ -40,12 +40,13 @@ public class BatchDto {
 	@NotNull(message = "End Date should not be null or empty ")
 	private LocalDate endDate;
 	
-	@Schema(
-			description = "Batch Hrs"
-			)
-	private int batchHrs;
+	
 	@Schema(
 			description = "Batch Code"
 			)
 	private String batchCode;
+	@Schema(
+			description = "Batch Hrs"
+			)
+	private int batchHrs;
 }

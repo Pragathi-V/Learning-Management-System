@@ -3,17 +3,22 @@ package com.capg.batchservice.service.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
- 
+
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import com.capg.batchservice.dto.APIResponseDto;
 import com.capg.batchservice.dto.BatchDto;
+import com.capg.batchservice.dto.StudentDto;
 import com.capg.batchservice.entity.Batch;
 import com.capg.batchservice.exception.ResourceNotFoundException;
 import com.capg.batchservice.mapper.BatchMapper;
 import com.capg.batchservice.repository.BatchRepository;
 import com.capg.batchservice.service.BatchService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
  
 @Service
@@ -21,6 +26,8 @@ import lombok.AllArgsConstructor;
 public class BatchServiceImpl implements BatchService  {
  
 	private BatchRepository batchRepository;
+	
+	private WebClient webclient;
 	
 	@Override
 	public BatchDto createBatch(BatchDto batchDto) {
@@ -30,32 +37,39 @@ public class BatchServiceImpl implements BatchService  {
 		return savedBatchDto;
 	}
  
-	@Override
-	public BatchDto getBatchByCode(String batchCode) {
-		Batch batch = batchRepository.findByBatchCode(batchCode);
-//				.orElseThrow(() -> new ResourceNotFoundException("Batch", "batchCode", batchCode));
-		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
-		return batchDto;
-	}
 //	@Override
-//	@CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDafaultStudent")
-//	public APIResponseDto getBatchByCode(String batchCode) {
+//	public BatchDto getBatchByCode(String batchCode) {
 //		Batch batch = batchRepository.findByBatchCode(batchCode);
 ////				.orElseThrow(() -> new ResourceNotFoundException("Batch", "batchCode", batchCode));
-//		List<StudentDto> studentDto = webClient.get()
+//		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
+//		return batchDto;
+//	}
+	@Override
+	@CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDafaultStudent")
+	public APIResponseDto getBatchByCode(String batchCode) {
+		Batch batch = batchRepository.findByBatchCode(batchCode);
+//				.orElseThrow(() -> new ResourceNotFoundException("Batch", "batchCode", batchCode));
+	    ParameterizedTypeReference<List<StudentDto>> responseType = new ParameterizedTypeReference<List<StudentDto>>() {};
+
+//		List<StudentDto> studentDto =  webclient.get()
 //				.uri("http://localhost:8083/api/student/code/" +batch.getBatchCode())
 //				.retrieve()
 //				.bodyToMono(StudentDto.class)
 //				.block();
-//		
+	    List<StudentDto> studentDtoList = webclient.get()
+	            .uri("http://localhost:8083/api/student/code/" + batch.getBatchCode())
+	            .retrieve()
+	            .bodyToMono(responseType)
+	            .block();
+		
+		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
+		APIResponseDto apiResponseDto = new APIResponseDto();
+	      apiResponseDto.setBatch(batchDto);
+	      apiResponseDto.setStudents(studentDtoList);
+	      return apiResponseDto;
 //		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
-//		APIResponseDto apiResponseDto = new APIResponseDto();
-//	      apiResponseDto.setBatch(batchDto);
-//	      apiResponseDto.setStudent(studentDto);
-//	      return apiResponseDto;
-////		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
-////		return batchDto;
-//	}
+//		return batchDto;
+	}
 	
 	@Override
 	public BatchDto getBatchById(Long batchId) throws ResourceNotFoundException {

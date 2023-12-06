@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.batchservice.dto.APIResponseDto;
 import com.capg.batchservice.dto.BatchDto;
 import com.capg.batchservice.service.BatchService;
 
@@ -47,9 +48,9 @@ public class BatchController {
  
 	@ApiResponse(responseCode = "200", description = "HTTP Status 200 SUCCESS")
 	@GetMapping("code/{batchCode}")
-	public ResponseEntity<BatchDto> getBatchByBatchCode(@PathVariable String batchCode) {
-		BatchDto batch = batchService.getBatchByCode(batchCode);
-		return new ResponseEntity<>(batch, HttpStatus.OK);
+	public ResponseEntity<APIResponseDto> getBatchByBatchCode(@PathVariable String batchCode) {
+		APIResponseDto apiResponseDto = batchService.getBatchByCode(batchCode);
+		return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
 	}
 	@Operation(summary = "Get Batch By ID REST API", description = "Get batch By REST API is used to get a batch object from the database")
  

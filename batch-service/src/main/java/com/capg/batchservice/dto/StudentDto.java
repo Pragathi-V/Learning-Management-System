@@ -34,9 +34,9 @@ public class StudentDto {
     
    
     @Schema(
-            description = "course code"
+            description = "batch code"
     )
-    @NotEmpty(message = "course code should not be null or empty ")
+    @NotEmpty(message = "batch code should not be null or empty ")
     private String batchCode;
 }
 

@@ -8,7 +8,8 @@ import com.capg.batchservice.dto.BatchDto;
 public interface BatchService {
  
 	public BatchDto createBatch(BatchDto batchDto);
-	public BatchDto getBatchByCode(String batchCode);
+//	public BatchDto getBatchByCode(String batchCode);
+	public APIResponseDto getBatchByCode(String batchCode);
 	public BatchDto getBatchById(Long batchId);
 	public List<BatchDto> getAllBatch();
 	public BatchDto updateBatch(BatchDto batchDto);

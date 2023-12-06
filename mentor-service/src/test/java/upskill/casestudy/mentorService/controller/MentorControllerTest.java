@@ -27,9 +27,10 @@ class MentorControllerTest {
 
     @Test
     public void testCreateMentor() {
-    	MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
-                "Occupied", 2, "BATCH001");        when(mentorService.createMentor(mentorDto)).thenReturn(mentorDto);
+    	MentorDto mentorDto = new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+                "A", "Senior Mentor", "Engineering", "Java",
+                "Occupied", 2, "BATCH001");
+        when(mentorService.createMentor(mentorDto)).thenReturn(mentorDto);
 
         ResponseEntity<MentorDto> responseEntity = mentorController.createMentor(mentorDto);
 
@@ -53,9 +54,10 @@ class MentorControllerTest {
 
     @Test
     public void testGetAllMentor() {
-        List<MentorDto> mentorList = Arrays.asList( new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
+        List<MentorDto> mentorList = Arrays.asList( new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+                "A", "Senior Mentor", "Engineering", "Java",
                 "Occupied", 2, "BATCH001"));
+
         when(mentorService.getAllMentors()).thenReturn(mentorList);
 
         ResponseEntity<List<MentorDto>> responseEntity = mentorController.getAllMentor();
@@ -67,9 +69,10 @@ class MentorControllerTest {
     @Test
     public void testUpdateMentor() {
         long mentorId = 1L;
-        MentorDto mentorDto =  new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
+        MentorDto mentorDto = new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+                "A", "Senior Mentor", "Engineering", "Java",
                 "Occupied", 2, "BATCH001");
+
         when(mentorService.updateMentor(mentorDto)).thenReturn(mentorDto);
 
         ResponseEntity<MentorDto> responseEntity = mentorController.updateMentor(mentorId, mentorDto);

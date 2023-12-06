@@ -15,11 +15,12 @@ class MentorDtoTest {
 	public void testValidMentorDto() {
 
 		
-		        MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-		                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
+		        MentorDto mentorDto = new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+		                "A", "Senior Mentor", "Engineering", "Java",
 		                "Occupied", 2, "BATCH001");
 
 	assertThat(mentorDto.getId()).isEqualTo(1L);
+	assertThat(mentorDto.getEmpId()).isEqualTo(12345L);
 
 	assertThat(mentorDto.getName()).isEqualTo("pragathi");
 
@@ -27,15 +28,15 @@ class MentorDtoTest {
 	
 	assertThat(mentorDto.getGrade()).isEqualTo("A");
 	assertThat(mentorDto.getDesignation()).isEqualTo("Senior Mentor");
-	assertThat(mentorDto.getSkills()).isEqualTo(new String[]{"Java", "Spring", "Hibernate"});
+	assertThat(mentorDto.getSkills()).isEqualTo("Java");
 	assertThat(mentorDto.getStream()).isEqualTo("Engineering");
 
 
-	assertThat(mentorDto.getNumOfBatches()).isEqualTo(40);
+	assertThat(mentorDto.getNumOfBatches()).isEqualTo(2);
 
 	assertThat(mentorDto.getStatus()).isEqualTo("Occupied");
 
-	assertThat(mentorDto.getBatchCode()).isEqualTo("C123");
+	assertThat(mentorDto.getBatchCode()).isEqualTo("BATCH001");
 
 	}
 	

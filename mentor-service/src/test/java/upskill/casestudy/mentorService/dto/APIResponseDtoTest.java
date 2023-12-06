@@ -10,9 +10,10 @@ class APIResponseDtoTest {
 
 	void testAPIResponseDtoConstructorAndGetters() {
 
-		 MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-	                "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
-	                "Occupied", 2, "BATCH001");
+		MentorDto mentorDto = new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+                "A", "Senior Mentor", "Engineering", "Java",
+                "Occupied", 2, "BATCH001");
+
 	BatchDto batchDto = new BatchDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01",2);
 
 	APIResponseDto apiResponseDto = new APIResponseDto(mentorDto, batchDto);
@@ -33,9 +34,10 @@ class APIResponseDtoTest {
 
 	assertNotNull(apiResponseDto);
 
-	 MentorDto mentorDto = new MentorDto(1, 12345L, "pragathi", "pragathi@gmail.com",
-             "A", "Senior Mentor", "Engineering", new String[]{"Java", "Spring", "Hibernate"},
-             "Occupied", 2, "BATCH001");
+	MentorDto mentorDto = new MentorDto(1L, 12345L, "pragathi", "pragathi@gmail.com",
+            "A", "Senior Mentor", "Engineering", "Java",
+            "Occupied", 2, "BATCH001");
+
 	BatchDto batchDto = new BatchDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01", 2);
 
 	apiResponseDto.setMentor(mentorDto);

@@ -1,9 +1,13 @@
 package com.capg.batchservice.service.impl;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +24,13 @@ import com.capg.batchservice.service.BatchService;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
+
  
 @Service
 @AllArgsConstructor
 public class BatchServiceImpl implements BatchService  {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(BatchServiceImpl.class);
  
 	private BatchRepository batchRepository;
 	
@@ -127,7 +134,28 @@ public class BatchServiceImpl implements BatchService  {
 		batchRepository.deleteById(batchID);
 		return "Deleted Successfully!!";
 	}
- 
+//	//fallback method
+//		public APIResponseDto getDafaultStudent(String batchCode , Exception exception) {
+//			LOGGER.info("inside getDafaultBatch() method");
+//			Batch batch= batchRepository.findByBatchCode(batchCode);
+//			   
+//			 List<StudentDto> studentDtoList= new ArrayList<>();
+//			 StudentDto studentDto1 = new StudentDto();
+//			 studentDto1.setStudentId(12345L);
+//			 studentDto1.setStudentName("Not registered");
+//			 studentDto1.setEmail("Not Registered");
+//			 studentDto1.setBatchCode("CLS01");
+//			 studentDtoList.add(studentDto1);
+//			
+//			   BatchDto	batchDto = BatchMapper.mapToBatchDto(batch);
+//			
+//			 APIResponseDto apiResponseDto= new APIResponseDto();
+//			 apiResponseDto.setBatch(batchDto);
+//			 apiResponseDto.setStudents(studentDtoList);
+//			
+//			return apiResponseDto;
+//		}
+// 
 }
  
 

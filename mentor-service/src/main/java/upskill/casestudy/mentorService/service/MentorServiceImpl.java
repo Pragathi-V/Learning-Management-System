@@ -86,12 +86,37 @@ public class MentorServiceImpl implements MentorService{
         return mentor.stream().map(MentorMapper::mapToMentorDto).collect(Collectors.toList());
     }
 
+//    @Override
+//    public MentorDto updateMentor(MentorDto mentorDto) {
+//
+//        Mentor mentor = mentorRepository.findByEmpId(mentorDto.getEmpId())
+//                .orElseThrow(() -> new ResourceNotFoundException("Mentor", "EmpId", mentorDto.getEmpId()));
+//        
+//        mentor.setName(mentorDto.getName());
+//        mentor.setEmail(mentorDto.getEmail());
+//        mentor.setDesignation(mentorDto.getDesignation());
+//        mentor.setGrade(mentorDto.getGrade());
+//        mentor.setSkills(mentorDto.getSkills());
+//        mentor.setStream(mentorDto.getStream());
+//        mentor.setNumOfBatches(mentorDto.getNumOfBatches());
+//        mentor.setBatchCode(mentorDto.getBatchCode());
+//        
+//        if(mentorDto.getNumOfBatches()>0 && mentorDto.getBatchCode()== null) {
+//        	mentor.setStatus("Free");
+//        	mentor.setNumOfBatches(0);
+//        	mentor.setBatchCode("Not Assigned");
+//        }else
+//        {mentor.setStatus("Occupied");}
+//        Mentor updatedMentor = mentorRepository.save(mentor);
+//       
+//        return MentorMapper.mapToMentorDto(updatedMentor);
+//    }
     @Override
     public MentorDto updateMentor(MentorDto mentorDto) {
 
-        Mentor mentor = mentorRepository.findByEmpId(mentorDto.getEmpId())
-                .orElseThrow(() -> new ResourceNotFoundException("Mentor", "EmpId", mentorDto.getEmpId()));
-        
+        Mentor mentor = mentorRepository.findById(mentorDto.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Mentor", "Id", mentorDto.getId()));
+        mentor.setEmpId(mentorDto.getEmpId());
         mentor.setName(mentorDto.getName());
         mentor.setEmail(mentorDto.getEmail());
         mentor.setDesignation(mentorDto.getDesignation());

@@ -12,6 +12,7 @@ import upskill.casestudy.studentservice.mapper.StudentMapper;
 import upskill.casestudy.studentservice.repository.StudentRepository;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +71,44 @@ class StudentServiceImplTest {
 
         // Act and Assert
         assertThrows(ResourceNotFoundException.class, () -> studentService.getStudentByID(1L));
+    }
+//    @Test
+//    void testGetStudentByBatchCodeNotFound() {
+//        // Arrange
+//        StudentRepository studentRepository = mock(StudentRepository.class);
+//        WebClient webClient = mock(WebClient.class);
+//        StudentServiceImpl studentService = new StudentServiceImpl(webClient, studentRepository);
+//        
+//        
+//
+//        when(studentRepository.findByBatchCode("aws")).thenReturn(Collections.EMPTY_LIST);
+//
+//        // Act and Assert
+//        assertThrows(ResourceNotFoundException.class, () -> studentService.getStudentByBatchCode("aws"));
+//        
+//    }
+    @Test
+    public void testGetStudentByBatchCode() {
+        // Mock data
+    	 StudentRepository studentRepository = mock(StudentRepository.class);
+    	 WebClient webClient = mock(WebClient.class);
+         StudentServiceImpl studentService = new StudentServiceImpl(webClient, studentRepository);
+        String batchCode = "AWS01";
+        List<Student> mockStudents = Arrays.asList(
+            new Student(1L,"pragathi","pragathi@gmail.com","AWS01"),
+            new Student(1L,"ritika","ritika@gmail.com","AWS01")
+            // Add more mock students as needed
+        );
+
+        // Mock the behavior of the studentRepository.findByBatchCode method
+        when(studentRepository.findByBatchCode(batchCode)).thenReturn(mockStudents);
+
+        // Call the actual method from your service
+        List<StudentDto> result = studentService.getStudentByBatchCode(batchCode);
+
+        // Assertions
+        assertEquals(mockStudents.size(), result.size());
+        
     }
 
     @Test

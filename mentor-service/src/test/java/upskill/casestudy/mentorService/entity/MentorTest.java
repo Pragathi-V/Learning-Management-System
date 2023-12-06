@@ -15,14 +15,14 @@ class MentorTest {
 	    public void testMentorEntity() {
 	        // Given
 	        Mentor mentor = new Mentor();
-	        mentor.setId(1);
+	        mentor.setId(1L);
 	        mentor.setEmpId(12345L);
 	        mentor.setName("pragathi");
 	        mentor.setEmail("pragathi@gmail.com");
 	        mentor.setGrade("A");
 	        mentor.setDesignation("Senior Mentor");
 	        mentor.setStream("Engineering");
-	        mentor.setSkills(new String[]{"Java", "Spring", "Hibernate"});
+	        mentor.setSkills("Java");
 	        mentor.setStatus("Occupied");
 	        mentor.setNumOfBatches(2);
 	        mentor.setBatchCode("BATCH001");
@@ -35,7 +35,7 @@ class MentorTest {
 	        assertThat(mentor.getGrade()).isEqualTo("A");
 	        assertThat(mentor.getDesignation()).isEqualTo("Senior Mentor");
 	        assertThat(mentor.getStream()).isEqualTo("Engineering");
-	        assertThat(mentor.getSkills()).containsExactly("Java", "Spring", "Hibernate");
+	        assertThat(mentor.getSkills()).contains("Java");
 	        assertThat(mentor.getStatus()).isEqualTo("Occupied");
 	        assertThat(mentor.getNumOfBatches()).isEqualTo(2);
 	        assertThat(mentor.getBatchCode()).isEqualTo("BATCH001");

@@ -29,7 +29,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 				description = "Mentor-service Doc"
 		)
 )
-public class MentorServiceApplication {
+public class MentorsServiceApplication {
 
 
 
@@ -39,7 +39,7 @@ public class MentorServiceApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(MentorServiceApplication.class, args);
+		SpringApplication.run(MentorsServiceApplication.class, args);
 	}
 
 }

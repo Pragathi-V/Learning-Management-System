@@ -82,8 +82,6 @@ public class BatchServiceImplTest {
     public void testUpdateBatch() {
         BatchDto batchDto = new BatchDto(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01",5);
         Batch existingBatch = new Batch(1L,"AWS",LocalDate.of(2023, 11, 11),LocalDate.of(2023, 12, 12),"AWS01",5);
-//        when(batchRepository.findById(batchDto.getBatchId()).thenReturn(Optional.of(existingBatch));
-//        when(batchRepository.save(any())).thenReturn(existingBatch);
         when(batchRepository.findById(batchDto.getBatchId())).thenReturn(Optional.of(existingBatch));
         when(batchRepository.save(any())).thenReturn(existingBatch);
 
@@ -91,31 +89,39 @@ public class BatchServiceImplTest {
         BatchDto updatedBatchDto = batchService.updateBatch1(batchDto);
  
         assertNotNull(updatedBatchDto);
-        // Add more assertions as needed
+      
     }
     
     @Test
-    public BatchDto updateBatch(BatchDto batchDto) throws ResourceNotFoundException {
-        Optional<Batch> optionalBatch = batchRepository.findById(batchDto.getBatchId());
+    public void testUpdateBatch1() throws ResourceNotFoundException {
+        // Mock data
+        BatchDto batchDto = new BatchDto();
+        batchDto.setBatchCode("AWS01");
+        batchDto.setBatchName("AWS Batch");
+        // Set other properties as needed
 
-        if (optionalBatch.isPresent()) {
-            Batch existingBatch = optionalBatch.get();
+        Batch existingBatch = new Batch();
+        existingBatch.setBatchCode("AWS01");
+        // Set other properties as needed
 
-            
+        // Mock the behavior of the batchRepository.findByBatchCode method
+        when(batchRepository.findByBatchCode(batchDto.getBatchCode())).thenReturn(existingBatch);
 
-            // Update batch details
-            existingBatch.setBatchName(batchDto.getBatchName());
-            existingBatch.setStartDate(batchDto.getStartDate());
-            existingBatch.setEndDate(batchDto.getEndDate());
-            existingBatch.setBatchCode(batchDto.getBatchCode());
-            existingBatch.setBatchHrs(batchDto.getBatchHrs());
+        // Mock the behavior of the batchRepository.save method
+        when(batchRepository.save(existingBatch)).thenReturn(existingBatch);
 
-            // Save and return updated batch
-            Batch updatedBatch = batchRepository.save(existingBatch);
-            return BatchMapper.mapToBatchDto(updatedBatch);
-        } else {
-            throw new ResourceNotFoundException("Batch", "batchId", batchDto.getBatchId());
-        }
+        // Call the actual method from your service
+        BatchDto result = batchService.updateBatch(batchDto);
+
+        // Assertions
+        assertEquals(batchDto.getBatchName(), result.getBatchName());
+        // Add more specific assertions based on your mapping logic and other properties
+
+        // Verify that batchRepository.findByBatchCode was called
+        verify(batchRepository, times(1)).findByBatchCode(batchDto.getBatchCode());
+
+        // Verify that batchRepository.save was called
+        verify(batchRepository, times(1)).save(existingBatch);
     }
 
  

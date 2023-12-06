@@ -49,8 +49,22 @@ public class MentorController {
             description = "HTTP Status 200 SUCCESS"
     )
     @GetMapping("/empId/{empId}")
-    public ResponseEntity<APIResponseDto> getMentorByEmpId(@PathVariable("empId") Long empId) {
+    public ResponseEntity<APIResponseDto> getMentorByEmpId(@PathVariable Long empId) {
         APIResponseDto apiResponseDto = mentorService.getMentorByEmpId(empId);
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
+    }
+    @Operation(
+            summary = "Get mentor By ID REST API",
+            description = "Get mentor By REST API is used to get a mentor object from the database"
+    )
+
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status 200 SUCCESS"
+    )
+    @GetMapping("/{id}")
+    public ResponseEntity<APIResponseDto> getMentorById(@PathVariable Long id) {
+        APIResponseDto apiResponseDto = mentorService.getMentorById(id);
         return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
     }
 

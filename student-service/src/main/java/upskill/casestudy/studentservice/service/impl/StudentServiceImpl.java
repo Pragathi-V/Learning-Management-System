@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
     public APIResponseDto getStudentByID(Long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("student", "id", studentId));
-
+ 
         BatchDto batchDto = webClient.get()
 				.uri("http://localhost:8081/api/batch/code/" +student.getBatchCode())
 				.retrieve()

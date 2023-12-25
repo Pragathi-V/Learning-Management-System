@@ -56,6 +56,21 @@ public class StudentController {
         APIResponseDto apiResponseDto = studentService.getStudentByID(studentId);
         return new ResponseEntity<APIResponseDto>(apiResponseDto, HttpStatus.OK);
     }
+//    @Operation(
+//            summary = "Get student By ID REST API",
+//            description = "Get student By REST API is used to get a student object from the database"
+//    )
+//
+//    @ApiResponse(
+//            responseCode = "200",
+//            description = "HTTP Status 200 SUCCESS"
+//    )
+//    @GetMapping("/{studentId}")
+//    public ResponseEntity<StudentDto> getStudentById(@PathVariable Long studentId) {
+//        StudentDto studentDto = studentService.getStudentByID(studentId);
+//        return new ResponseEntity<StudentDto>(studentDto, HttpStatus.OK);
+//    }
+
 
     @Operation(
             summary = "Get student By REST API",

@@ -63,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
                 .orElseThrow(() -> new ResourceNotFoundException("student", "id", studentId));
  
         BatchDto batchDto = webClient.get()
-				.uri("http://localhost:8081/api/batch/code/" +student.getBatchCode())
+				.uri("http://localhost:8081/api/batch/code1/" +student.getBatchCode())
 				.retrieve()
 				.bodyToMono(BatchDto.class)
 				.block();

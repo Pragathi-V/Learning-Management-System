@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import upskill.casestudy.mentorService.dto.APIResponseDto;
+import upskill.casestudy.mentorService.dto.APIResponseDtoMentor;
 import upskill.casestudy.mentorService.dto.MentorDto;
 import upskill.casestudy.mentorService.service.MentorService;
 
@@ -49,8 +49,8 @@ public class MentorController {
             description = "HTTP Status 200 SUCCESS"
     )
     @GetMapping("/empId/{empId}")
-    public ResponseEntity<APIResponseDto> getMentorByEmpId(@PathVariable Long empId) {
-        APIResponseDto apiResponseDto = mentorService.getMentorByEmpId(empId);
+    public ResponseEntity<APIResponseDtoMentor> getMentorByEmpId(@PathVariable Long empId) {
+        APIResponseDtoMentor apiResponseDto = mentorService.getMentorByEmpId(empId);
         return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
     }
     @Operation(
@@ -63,8 +63,8 @@ public class MentorController {
             description = "HTTP Status 200 SUCCESS"
     )
     @GetMapping("/{id}")
-    public ResponseEntity<APIResponseDto> getMentorById(@PathVariable Long id) {
-        APIResponseDto apiResponseDto = mentorService.getMentorById(id);
+    public ResponseEntity<APIResponseDtoMentor> getMentorById(@PathVariable Long id) {
+        APIResponseDtoMentor apiResponseDto = mentorService.getMentorById(id);
         return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
     }
 
@@ -112,7 +112,7 @@ public class MentorController {
     @DeleteMapping("{empId}")
     public ResponseEntity<String> deleteMentor(@PathVariable Long empId){
         mentorService.deleteMentor(empId);
-        return new ResponseEntity<String>("User successfully deleted!!", HttpStatus.OK);
+        return new ResponseEntity<String>("Mentor successfully deleted!!", HttpStatus.OK);
     }
     @Operation(
             summary = "Update mentor By ID REST API",

@@ -12,6 +12,7 @@ public interface StudentService {
     public StudentDto createStudent(StudentDto studentDto);
 
     public APIResponseDto getStudentByID(Long studentId);
+//    public StudentDto getStudentByID(Long StudentId);
 
     public List<StudentDto> getAllStudents();
 

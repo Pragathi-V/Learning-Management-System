@@ -44,13 +44,13 @@ public class BatchServiceImpl implements BatchService  {
 		return savedBatchDto;
 	}
  
-//	@Override
-//	public BatchDto getBatchByCode(String batchCode) {
-//		Batch batch = batchRepository.findByBatchCode(batchCode);
-////				.orElseThrow(() -> new ResourceNotFoundException("Batch", "batchCode", batchCode));
-//		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
-//		return batchDto;
-//	}
+	@Override
+	public BatchDto getBatchByCode1(String batchCode) {
+		Batch batch = batchRepository.findByBatchCode(batchCode);
+//				.orElseThrow(() -> new ResourceNotFoundException("Batch", "batchCode", batchCode));
+		BatchDto batchDto = BatchMapper.mapToBatchDto(batch);
+		return batchDto;
+	}
 	@Override
 	@CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "getDafaultStudent")
 	public APIResponseDto getBatchByCode(String batchCode) {

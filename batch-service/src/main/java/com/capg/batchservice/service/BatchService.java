@@ -16,4 +16,5 @@ public interface BatchService {
 	public BatchDto updateBatch1(BatchDto batchDto);
 	public String deleteBatch1(String batchCode);
 	public String deleteBatch(Long batchID);
+	public BatchDto getBatchByCode1(String batchCode);
 }

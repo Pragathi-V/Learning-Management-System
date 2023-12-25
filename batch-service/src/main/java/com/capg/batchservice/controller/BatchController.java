@@ -52,6 +52,14 @@ public class BatchController {
 		APIResponseDto apiResponseDto = batchService.getBatchByCode(batchCode);
 		return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
 	}
+	@Operation(summary = "Get Batch By Code REST API", description = "Get batch By REST API is used to get a batch object from the database")
+	 
+	@ApiResponse(responseCode = "200", description = "HTTP Status 200 SUCCESS")
+	@GetMapping("code1/{batchCode}")
+	public ResponseEntity<BatchDto> getBatchByBatchCode1(@PathVariable String batchCode) {
+		BatchDto batchDto = batchService.getBatchByCode1(batchCode);
+		return new ResponseEntity<>(batchDto, HttpStatus.OK);
+	}
 	@Operation(summary = "Get Batch By ID REST API", description = "Get batch By REST API is used to get a batch object from the database")
  
 	@ApiResponse(responseCode = "200", description = "HTTP Status 200 SUCCESS")

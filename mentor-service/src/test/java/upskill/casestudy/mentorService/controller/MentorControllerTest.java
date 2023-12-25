@@ -16,7 +16,7 @@ import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 
-import upskill.casestudy.mentorService.dto.APIResponseDto;
+import upskill.casestudy.mentorService.dto.APIResponseDtoMentor;
 import upskill.casestudy.mentorService.dto.MentorDto;
 import upskill.casestudy.mentorService.service.MentorService;
 
@@ -42,10 +42,10 @@ class MentorControllerTest {
     @Test
     public void testGetMentorById() {
         Long empId = 1L;
-        APIResponseDto apiResponseDto = new APIResponseDto();
+        APIResponseDtoMentor apiResponseDto = new APIResponseDtoMentor();
         when(mentorService.getMentorByEmpId(empId)).thenReturn(apiResponseDto);
 
-        ResponseEntity<APIResponseDto> responseEntity = mentorController.getMentorByEmpId(empId);
+        ResponseEntity<APIResponseDtoMentor> responseEntity = mentorController.getMentorByEmpId(empId);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertNotNull(responseEntity.getBody());

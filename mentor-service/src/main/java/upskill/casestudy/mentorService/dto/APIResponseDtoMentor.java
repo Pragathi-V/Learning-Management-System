@@ -8,10 +8,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class APIResponseDto {
+@AllArgsConstructor
+public class APIResponseDtoMentor {
 
-	 private BatchDto batch;
-	    private List<StudentDto> students;
+    private MentorDto mentor;
+    private APIResponseDto apiResponseDto;
+//    private BatchDto batch;
+//    private List<StudentDto> students;
 }
